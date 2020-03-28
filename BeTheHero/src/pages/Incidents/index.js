@@ -3,10 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
+import Geolocation from '@react-native-community/geolocation';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import styles from './styles';
 import logoImg from '../../assets/logo.png';
 import api from '../../services/api';
+import global from '../../config/global-styles';
+import geolocationIncidents from '../../config/geolocationIncidents';
+
 
 export default function Incidents() {
   const [incidents, setIncidents] = useState([]);
@@ -18,8 +23,11 @@ export default function Incidents() {
   function navigateToDetail(incident) {
     navigation.navigate('Detail', { incident });
   }
+  function navigateToConfig() {
+    navigation.navigate('Config');
+  }
 
-  function loadIncidents() {
+  function loadIncidents(coords) {
     if (loading) {
       return;
     }
@@ -30,7 +38,7 @@ export default function Incidents() {
     setLoading(true);
 
     api.get('incidents', {
-      params: { page },
+      params: { page, coords },
     })
       .then(response => {
         setIncidents([...incidents, ...response.data]);
@@ -42,18 +50,41 @@ export default function Incidents() {
   }
 
   useEffect(() => {
-    loadIncidents();
   }, []);
 
+  useEffect(() => {
+    AsyncStorage.getItem('@firstLaunch')
+      .then(async value => {
+        if (value === null) {
+          await AsyncStorage.setItem('@firstLaunch', 'false');
+          await AsyncStorage.setItem('@theme', 'light');
+          await AsyncStorage.setItem('@geoConfig', 'false');
+          geolocationIncidents.setGeolocationIncidents('false');
+        }
+      });
+  }, []);
 
+  useEffect(() => {
+    geolocationIncidents.isGeolocationIncidents()
+      .then(value => {
+        if (value === 'true') {
+          const coords = Geolocation.getCurrentPosition();
+          return loadIncidents(coords);
+        }
+        loadIncidents();
+      });
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <View style={global.container}>
+      <View style={global.header}>
         <Image source={logoImg} />
         <Text style={styles.headerText}>
           Total de <Text style={styles.headerTextBold}>{total} casos.</Text>
         </Text>
+        <TouchableOpacity onPress={navigateToConfig}>
+          <Feather name="settings" size={28} color="#e02041" />
+        </TouchableOpacity>
       </View>
 
       <Text style={styles.title}>Bem Vindo!</Text>
