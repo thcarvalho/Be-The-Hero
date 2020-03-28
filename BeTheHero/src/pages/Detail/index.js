@@ -9,6 +9,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles';
+import global from '../../config/global-styles';
 
 export default function Detail() {
   const navigation = useNavigation();
@@ -33,12 +34,12 @@ export default function Detail() {
     Linking.openURL(`whatsapp://send?phone=55${incident.whatsapp}&text=${message}`);
   }
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Image source={logoImg} />
+    <View style={global.container}>
+      <View style={global.header}>
         <TouchableOpacity onPress={navigateBack}>
           <Feather name="arrow-left" size={28} color="#e02041" />
         </TouchableOpacity>
+        <Image source={logoImg} />
       </View>
 
       <View style={styles.incident}>
