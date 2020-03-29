@@ -1,56 +1,61 @@
-import {StyleSheet} from "react-native";
+import {StyleSheet} from 'react-native';
+
+import styled from 'styled-components/native';
+
+export const HeaderText = styled.Text`
+  font-size: 17px;
+  color: #e02041;
+`;
+
+export const OptionContainer = styled.TouchableOpacity`
+  border-bottom-color: #c4c4c4;
+  border-bottom-width: 1px;
+  height: 100px;
+  justify-content: center;
+  padding-left: 5px;
+  padding-right: 5px;
+`;
+export const ContainerText = styled.Text`
+  font-size: 20px;
+  color: #41414d;
+`;
+export const ContainerSubtext = styled.Text`
+  color: #c4c4c4;
+  font-weight: bold;
+`;
+export const ContainerAlign = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const ModalContainer = styled.View`
+  width: 90%;
+  height: 240;
+  background-color: #fff;
+  border-radius: 3px;
+  justify-content: space-evenly;
+  box-shadow: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
+export const ModalText = styled.Text`
+  font-size: 18px;
+`;
+
+export const RadioContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  height: 40px;
+`;
+export const RadioSelection = styled.Text`
+  font-size: 18px;
+  color: #41414d;
+`;
 
 export default StyleSheet.create({
-  headerText: {
-    fontSize: 17,
-    color: '#e02041',
-  },
-
-  optionContainer: {
-    borderBottomColor: '#c4c4c4',
-    borderBottomWidth: 1,
-    height: 100,
-    justifyContent: 'center',
-    paddingHorizontal: 5,
-  },
-  containerText: {
-    fontSize: 20,
-    color: '#41414d',
-  },
-  containerSubtext: {
-    color: '#c4c4c4',
-    fontWeight: "bold"
-  },
-  containerAlign: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-
   modal: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalContainer: {
-    width: '90%',
-    height: 240,
-    backgroundColor: "#fff",
-    borderRadius: 3,
-    justifyContent: "space-evenly",
-    elevation: 10,
-    paddingHorizontal: 20,
-  },
-  modalText: {
-    fontSize: 18,
-  },
-
-  radioContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    height: 40,
-  },
-  radioSelection: {
-    fontSize: 18,
-    color: '#41414d',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

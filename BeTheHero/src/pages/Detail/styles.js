@@ -1,59 +1,59 @@
 import {StyleSheet} from 'react-native';
+import styled from 'styled-components/native';
 
-export default StyleSheet.create({
-  incident: {
-    padding: 24,
-    borderRadius: 8,
-    backgroundColor: '#FFF',
-    marginBottom: 16,
-    marginTop: 48,
-  },
-  incidentProperty: {
-    fontSize: 14,
-    color: '#41414d',
-    fontWeight: 'bold',
-    marginTop: 24,
-  },
-  incidentValue: {
-    marginTop: 8,
-    fontSize: 15,
-    color: '#737380',
-  },
+export const Incident = styled.View`
+  padding: 24px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 16px;
+  margin-top: 48px;
+`;
+export const IncidentProperty = styled.Text`
+  font-size: 14px;
+  color: #41414d;
+  font-weight: bold;
+  margin-top: 24px;
+`;
+export const IncidentValue = styled.Text`
+  margin-top: 8px;
+  font-size: 15px;
+  color: #737380;
+`;
 
-  contactBox: {
-    padding: 24,
-    borderRadius: 8,
-    backgroundColor: '#FFF',
-    marginBottom: 16,
-  },
-  heroTitle: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: '#13131a',
-    lineHeight: 30,
-  },
-  heroDescription: {
-    fontSize: 15,
-    color: '#737380',
-    marginTop: 16,
-  },
-  actions: {
-    marginTop: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  action: {
-    backgroundColor: '#e02041',
-    borderRadius: 8,
-    height: 50,
-    width: '48%',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-  },
-  actionText: {
-    color: '#fff',
-    fontSize: 15,
-    fontWeight: 'bold',
-  },
-});
+export const ContactBox = styled.View`
+  padding: 24px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 16px;
+`;
+export const HeroTitle = styled.Text`
+  font-weight: bold;
+  font-size: 20px;
+  color: #13131a;
+  line-height: 30px;
+`;
+export const HeroDescription = styled.Text`
+  font-size: 15px;
+  color: #737380;
+  margin-top: 16px;
+`;
+
+export const Actions = styled.View`
+  margin-top: 16px;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+export const Action = styled.TouchableOpacity`
+  background-color: #e02041;
+  border-radius: 8px;
+  height: 50px;
+  width: 48%;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+export const ActionText = styled.Text`
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+`;

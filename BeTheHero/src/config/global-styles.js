@@ -1,14 +1,15 @@
-import {StyleSheet, StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
 
-export default StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: StatusBar.currentHeight + 20,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-});
+import styled from 'styled-components/native';
+
+export const Container = styled.View`
+  flex: 1;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: ${StatusBar.currentHeight + 20 + 'px'};
+`;
+export const Header = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;

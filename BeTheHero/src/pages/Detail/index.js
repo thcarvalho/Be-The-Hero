@@ -1,6 +1,7 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Image, Text, ToastAndroid, Linking } from 'react-native';
+import { TouchableOpacity, Image, ToastAndroid, Linking } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Mailer from 'react-native-mail';
 
@@ -8,8 +9,18 @@ import logoImg from '../../assets/logo.png';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-import styles from './styles';
-import global from '../../config/global-styles';
+import {
+  IncidentProperty,
+  IncidentValue,
+  Incident,
+  HeroTitle,
+  HeroDescription,
+  Actions,
+  Action,
+  ActionText,
+  ContactBox,
+} from './styles';
+import { Header, Container } from '../../config/global-styles';
 
 export default function Detail() {
   const navigation = useNavigation();
@@ -34,49 +45,49 @@ export default function Detail() {
     Linking.openURL(`whatsapp://send?phone=55${incident.whatsapp}&text=${message}`);
   }
   return (
-    <View style={global.container}>
-      <View style={global.header}>
+    <Container>
+      <Header>
         <TouchableOpacity onPress={navigateBack}>
           <Feather name="arrow-left" size={28} color="#e02041" />
         </TouchableOpacity>
         <Image source={logoImg} />
-      </View>
+      </Header>
 
-      <View style={styles.incident}>
-        <Text style={[styles.incidentProperty, { marginTop: 0 }]}>ONG:</Text>
-        <Text style={styles.incidentValue}>{incident.name} de {incident.city}/{incident.uf}</Text>
+      <Incident>
+        <IncidentProperty style={{ marginTop: 0 }}>ONG:</IncidentProperty>
+        <IncidentValue>{incident.name} de {incident.city}/{incident.uf}</IncidentValue>
 
-        <Text style={styles.incidentProperty}>CASO:</Text>
-        <Text style={styles.incidentValue}>{incident.description}</Text>
+        <IncidentProperty>CASO:</IncidentProperty>
+        <IncidentValue>{incident.description}</IncidentValue>
 
-        <Text style={styles.incidentProperty}>VALOR:</Text>
-        <Text style={styles.incidentValue}>
+        <IncidentProperty>VALOR:</IncidentProperty>
+        <IncidentValue>
           {
             Intl.NumberFormat('pt-BR', {
               style: 'currency',
               currency: 'BRL',
             }).format(incident.value)
           }
-        </Text>
-      </View>
+        </IncidentValue>
+      </Incident>
 
-      <View style={styles.contactBox}>
-        <Text style={styles.heroTitle}>Salve o dia!</Text>
-        <Text style={styles.heroTitle}>Seja o herói desse caso.</Text>
+      <ContactBox>
+        <HeroTitle>Salve o dia!</HeroTitle>
+        <HeroTitle>Seja o herói desse caso.</HeroTitle>
 
-        <Text style={styles.heroDescription}>Entre em contato: </Text>
+        <HeroDescription>Entre em contato: </HeroDescription>
 
-        <View style={styles.actions}>
-          <TouchableOpacity style={styles.action} onPress={sendWhatsapp}>
+        <Actions>
+          <Action onPress={sendWhatsapp}>
             <FontAwesome name="whatsapp" size={16} color="#fff" />
-            <Text style={styles.actionText}>Whatsapp</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.action} onPress={sendMail}>
+            <ActionText>Whatsapp</ActionText>
+          </Action>
+          <Action onPress={sendMail}>
             <Feather name="mail" size={16} color="#fff" />
-            <Text style={styles.actionText}>E-Mail</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
+            <ActionText>E-Mail</ActionText>
+          </Action>
+        </Actions>
+      </ContactBox>
+    </Container>
   );
 }

@@ -1,17 +1,32 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from 'react';
-import { View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
 import Geolocation from '@react-native-community/geolocation';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import styles from './styles';
+import styles, {
+  HeaderText,
+  Title,
+  Description,
+  Incident,
+  IncidentProperty,
+  IncidentValue,
+  DetailButton,
+  DetailButtonText,
+  HeaderTextBold,
+} from './styles';
 import logoImg from '../../assets/logo.png';
 import api from '../../services/api';
-import global from '../../config/global-styles';
+import { Container, Header } from '../../config/global-styles';
 import geolocationIncidents from '../../config/geolocationIncidents';
-
 
 export default function Incidents() {
   const [incidents, setIncidents] = useState([]);
@@ -76,21 +91,21 @@ export default function Incidents() {
   }, []);
 
   return (
-    <View style={global.container}>
-      <View style={global.header}>
-        <Image source={logoImg} />
-        <Text style={styles.headerText}>
-          Total de <Text style={styles.headerTextBold}>{total} casos.</Text>
-        </Text>
+    <Container>
+      <Header>
+        <Image source={logoImg}/>
+        <HeaderText>
+          Total de <HeaderTextBold>{total} casos.</HeaderTextBold>
+        </HeaderText>
         <TouchableOpacity onPress={navigateToConfig}>
           <Feather name="settings" size={28} color="#e02041" />
         </TouchableOpacity>
-      </View>
+      </Header>
 
-      <Text style={styles.title}>Bem Vindo!</Text>
-      <Text style={styles.description}>
+      <Title>Bem Vindo!</Title>
+      <Description>
         Escolha um dos casos abaixo e salve o dia!
-      </Text>
+      </Description>
 
       <FlatList
         data={incidents}
@@ -100,32 +115,31 @@ export default function Incidents() {
         keyExtractor={incident => String(incident.id)}
         showsVerticalScrollIndicator={false}
         renderItem={({ item: incident }) => (
-          <View style={styles.incident}>
-            <Text style={styles.incidentProperty}>ONG:</Text>
-            <Text style={styles.incidentValue}>{incident.name} de {incident.city}/{incident.uf}</Text>
+          <Incident>
+            <IncidentProperty>ONG:</IncidentProperty>
+            <IncidentValue>{incident.name} de {incident.city}/{incident.uf}</IncidentValue>
 
-            <Text style={styles.incidentProperty}>CASO:</Text>
-            <Text style={styles.incidentValue}>{incident.description}</Text>
+            <IncidentProperty>CASO:</IncidentProperty>
+            <IncidentValue>{incident.description}</IncidentValue>
 
-            <Text style={styles.incidentProperty}>VALOR:</Text>
-            <Text style={styles.incidentValue}>
+            <IncidentProperty>VALOR:</IncidentProperty>
+            <IncidentValue>
               {
                 Intl.NumberFormat('pt-BR', {
                   style: 'currency',
                   currency: 'BRL',
                 }).format(incident.value)
               }
-            </Text>
+            </IncidentValue>
 
-            <TouchableOpacity
-              style={styles.detailButton}
+            <DetailButton
               onPress={() => navigateToDetail(incident)}>
-              <Text style={styles.detailButtonText}>Ver mais detalhes</Text>
+              <DetailButtonText>Ver mais detalhes</DetailButtonText>
               <Feather name="arrow-right" size={16} color="#e02041" />
-            </TouchableOpacity>
-          </View>
+            </DetailButton>
+          </Incident>
         )}
       />
-    </View>
+    </Container>
   );
 }
