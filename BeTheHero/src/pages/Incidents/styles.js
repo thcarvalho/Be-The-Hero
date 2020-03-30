@@ -23,24 +23,6 @@ export const Description = styled.Text`
   color: #737380;
 `;
 
-export const Incident = styled.View`
-  padding: 24px;
-  border-radius: 8px;
-  background-color: '#fff';
-  margin-bottom: 16px;
-`;
-export const IncidentProperty = styled.Text`
-  font-size: 14px;
-  color: #41414d;
-  font-weight: bold;
-`;
-export const IncidentValue = styled.Text`
-  margin-top: 8px;
-  font-size: 15px;
-  margin-bottom: 24px;
-  color: #737380;
-`;
-
 export const DetailButton = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;

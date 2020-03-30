@@ -1,6 +1,5 @@
-import {StyleSheet} from 'react-native';
-
 import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 
 export const HeaderText = styled.Text`
   font-size: 17px;
@@ -26,30 +25,6 @@ export const ContainerSubtext = styled.Text`
 export const ContainerAlign = styled.View`
   flex-direction: row;
   justify-content: space-between;
-`;
-
-export const ModalContainer = styled.View`
-  width: 90%;
-  height: 240;
-  background-color: #fff;
-  border-radius: 3px;
-  justify-content: space-evenly;
-  box-shadow: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-`;
-export const ModalText = styled.Text`
-  font-size: 18px;
-`;
-
-export const RadioContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-  height: 40px;
-`;
-export const RadioSelection = styled.Text`
-  font-size: 18px;
-  color: #41414d;
 `;
 
 export default StyleSheet.create({

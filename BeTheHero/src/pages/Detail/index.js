@@ -21,6 +21,7 @@ import {
   ContactBox,
 } from './styles';
 import { Header, Container } from '../../config/global-styles';
+import IncidentContainer from '../../components/IncidentContainer';
 
 export default function Detail() {
   const navigation = useNavigation();
@@ -53,23 +54,7 @@ export default function Detail() {
         <Image source={logoImg} />
       </Header>
 
-      <Incident>
-        <IncidentProperty style={{ marginTop: 0 }}>ONG:</IncidentProperty>
-        <IncidentValue>{incident.name} de {incident.city}/{incident.uf}</IncidentValue>
-
-        <IncidentProperty>CASO:</IncidentProperty>
-        <IncidentValue>{incident.description}</IncidentValue>
-
-        <IncidentProperty>VALOR:</IncidentProperty>
-        <IncidentValue>
-          {
-            Intl.NumberFormat('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-            }).format(incident.value)
-          }
-        </IncidentValue>
-      </Incident>
+      <IncidentContainer incident={incident} style={{marginTop: 48}} />
 
       <ContactBox>
         <HeroTitle>Salve o dia!</HeroTitle>

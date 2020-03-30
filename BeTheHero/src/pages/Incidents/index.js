@@ -16,9 +16,6 @@ import styles, {
   HeaderText,
   Title,
   Description,
-  Incident,
-  IncidentProperty,
-  IncidentValue,
   DetailButton,
   DetailButtonText,
   HeaderTextBold,
@@ -27,6 +24,7 @@ import logoImg from '../../assets/logo.png';
 import api from '../../services/api';
 import { Container, Header } from '../../config/global-styles';
 import geolocationIncidents from '../../config/geolocationIncidents';
+import IncidentContainer from '../../components/IncidentContainer';
 
 export default function Incidents() {
   const [incidents, setIncidents] = useState([]);
@@ -65,9 +63,6 @@ export default function Incidents() {
   }
 
   useEffect(() => {
-  }, []);
-
-  useEffect(() => {
     AsyncStorage.getItem('@firstLaunch')
       .then(async value => {
         if (value === null) {
@@ -93,7 +88,7 @@ export default function Incidents() {
   return (
     <Container>
       <Header>
-        <Image source={logoImg}/>
+        <Image source={logoImg} />
         <HeaderText>
           Total de <HeaderTextBold>{total} casos.</HeaderTextBold>
         </HeaderText>
@@ -115,29 +110,13 @@ export default function Incidents() {
         keyExtractor={incident => String(incident.id)}
         showsVerticalScrollIndicator={false}
         renderItem={({ item: incident }) => (
-          <Incident>
-            <IncidentProperty>ONG:</IncidentProperty>
-            <IncidentValue>{incident.name} de {incident.city}/{incident.uf}</IncidentValue>
-
-            <IncidentProperty>CASO:</IncidentProperty>
-            <IncidentValue>{incident.description}</IncidentValue>
-
-            <IncidentProperty>VALOR:</IncidentProperty>
-            <IncidentValue>
-              {
-                Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                }).format(incident.value)
-              }
-            </IncidentValue>
-
+          <IncidentContainer incident={incident}>
             <DetailButton
               onPress={() => navigateToDetail(incident)}>
               <DetailButtonText>Ver mais detalhes</DetailButtonText>
               <Feather name="arrow-right" size={16} color="#e02041" />
             </DetailButton>
-          </Incident>
+          </IncidentContainer>
         )}
       />
     </Container>

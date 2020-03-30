@@ -5,7 +5,6 @@ import {View, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
 import Modal from 'react-native-modal';
-import {RadioButton} from 'react-native-paper';
 
 import {Container, Header} from '../../config/global-styles';
 import styles, {
@@ -13,13 +12,10 @@ import styles, {
   ContainerText,
   ContainerSubtext,
   ContainerAlign,
-  ModalText,
-  RadioContainer,
-  RadioSelection,
-  ModalContainer,
   HeaderText,
 } from './styles';
 import geolocationIncidents from '../../config/geolocationIncidents';
+import GeolocationModal from '../../components/GeolocationModal';
 
 export default function Config() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -79,27 +75,10 @@ export default function Config() {
         onBackdropPress={() => setModalVisible(false)}
         useNativeDriver={true}
         coverScreen={false}>
-        <ModalContainer>
-          <ModalText>Mostrar apenas casos mais próximos de mim?</ModalText>
-          <RadioContainer>
-            <RadioButton
-              color="#e02041"
-              value="Ligado"
-              status={radioChecked === 'Ligado' ? 'checked' : 'unchecked'}
-              onPress={() => setGeolocationConfig('Ligado')}
-            />
-            <RadioSelection>Ligado</RadioSelection>
-          </RadioContainer>
-          <RadioContainer style={{borderBottomWidth: 0}}>
-            <RadioButton
-              color="#e02041"
-              value="Desligado"
-              status={radioChecked === 'Desligado' ? 'checked' : 'unchecked'}
-              onPress={() => setGeolocationConfig('Desligado')}
-            />
-            <RadioSelection>Desligado</RadioSelection>
-          </RadioContainer>
-        </ModalContainer>
+        <GeolocationModal
+          radioChecked={radioChecked}
+          setGeolocationConfig={setGeolocationConfig}
+        />
       </Modal>
     </Container>
   );
