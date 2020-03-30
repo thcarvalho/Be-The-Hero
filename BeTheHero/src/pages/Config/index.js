@@ -1,12 +1,15 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, TouchableOpacity } from 'react-native';
 
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
 import Modal from 'react-native-modal';
+import { ThemeConsumer } from 'styled-components';
 
-import {Container, Header} from '../../config/global-styles';
+import { ThemeContext } from '../../../App';
+import { Container, Header } from '../../config/global-styles';
 import styles, {
   OptionContainer,
   ContainerText,
@@ -16,10 +19,18 @@ import styles, {
 } from './styles';
 import geolocationIncidents from '../../config/geolocationIncidents';
 import GeolocationModal from '../../components/GeolocationModal';
+import dark from '../../config/themes/dark';
+import light from '../../config/themes/light';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Config() {
+  const themeContext = useContext(ThemeConsumer);
+  const setThemeContext = useContext(ThemeContext);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [radioChecked, setRadioChecked] = useState('Desligado');
+  const [theme, setTheme] = useState(themeContext);
+
   const navigation = useNavigation();
 
   function navigateBack() {
@@ -33,6 +44,12 @@ export default function Config() {
       await geolocationIncidents.setGeolocationIncidents('false');
     }
     setRadioChecked(config);
+  }
+
+  async function changeTheme() {
+    setThemeContext(theme.title === 'Light' ? dark : light);
+    await AsyncStorage.setItem('@theme', theme.title === 'Light' ? 'Dark' : 'Light');
+    setTheme(theme.title === 'Light' ? dark : light);
   }
 
   useEffect(() => {
@@ -57,15 +74,19 @@ export default function Config() {
       </Header>
       <OptionContainer
         onPress={() => setModalVisible(true)}
-        style={{marginTop: 20}}>
+        style={{ marginTop: 20 }}>
         <ContainerText>Mostrar apenas casos mais próximos de mim</ContainerText>
         <ContainerSubtext>{radioChecked}</ContainerSubtext>
       </OptionContainer>
       <OptionContainer>
         <ContainerAlign>
           <ContainerText>Dark Mode</ContainerText>
-          <TouchableOpacity onPress={() => {}}>
-            <Feather name="sun" size={28} color="#41414d" />
+          <TouchableOpacity onPress={changeTheme}>
+            <Feather
+              name={theme.title === 'Light' ? 'moon' : 'sun'}
+              size={28}
+              color={theme.title === 'Light' ? '#41414d' : '#fff'}
+            />
           </TouchableOpacity>
         </ContainerAlign>
       </OptionContainer>

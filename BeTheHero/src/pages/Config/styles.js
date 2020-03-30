@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 export const HeaderText = styled.Text`
   font-size: 17px;
-  color: #e02041;
+  color: ${({theme}) => theme.colors.primary};
 `;
 
 export const OptionContainer = styled.TouchableOpacity`
@@ -16,7 +16,7 @@ export const OptionContainer = styled.TouchableOpacity`
 `;
 export const ContainerText = styled.Text`
   font-size: 20px;
-  color: #41414d;
+  color: ${({theme}) => theme.colors.defaultText};
 `;
 export const ContainerSubtext = styled.Text`
   color: #c4c4c4;

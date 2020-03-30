@@ -7,6 +7,7 @@ export const Container = styled.View`
   padding-left: 24px;
   padding-right: 24px;
   padding-top: ${StatusBar.currentHeight + 20 + 'px'};
+  background-color: ${({theme}) => theme.colors.background};
 `;
 export const Header = styled.View`
   flex-direction: row;

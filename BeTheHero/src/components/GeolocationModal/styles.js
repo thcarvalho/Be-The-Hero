@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const ModalContainer = styled.View`
   width: 90%;
   height: 240px;
-  background-color: #fff;
+  background-color: ${({theme}) => theme.colors.background};
   border-radius: 3px;
   justify-content: space-evenly;
   padding-left: 20px;
@@ -11,6 +11,7 @@ export const ModalContainer = styled.View`
 `;
 export const ModalText = styled.Text`
   font-size: 18px;
+  color: ${({theme}) => theme.colors.defaultText};
 `;
 
 export const RadioContainer = styled.View`
@@ -20,5 +21,5 @@ export const RadioContainer = styled.View`
 `;
 export const RadioSelection = styled.Text`
   font-size: 18px;
-  color: #41414d;
+  color: ${({theme}) => theme.colors.defaultText};
 `;
